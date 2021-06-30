@@ -7,6 +7,9 @@
         <field name="arch" type="xml">
             <form string="Install Form">
                 <sheet>
+                    <header>
+                        <button name="action_paid" type="object" string="Paid"  class="o    e_highlight"/>
+                    </header>
 
                     <group>
                         <field name="patient_id"/>
@@ -16,7 +19,7 @@
                     <group string="Payment Info">
                         <field name="installment"/>
                         <field name="date"/>
-                        <field name="maturity_date"/>
+
                         <field name="due_date"/>
                         <field name="paied"/>
 
@@ -33,9 +36,9 @@
         <field name="arch" type="xml">
             <tree string="tree view for Installment">
                 <field name="patient_id"/>
-                <field name="installment"/>
+                <field name="installment" sum="Total Of Installments"/>
 
-                <field name="maturity_date"/>
+
                 <field name="due_date"/>
                 <field name="date"/>
                 <field name="paied"/>
@@ -55,8 +58,9 @@
         </field>
     </record>
 
-    <menuitem id="installment_root" name="Install List" parent="doctor_root"
-              action="action_installment" sequence="40"/>
+
+    <menuitem id="installment_root" name="Installment List" parent="patients_root"
+              action="action_installment" sequence="3"/>
 
 
 </odoo>

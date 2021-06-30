@@ -88,6 +88,5 @@
         </field>
     </record>
 
-    <menuitem id="doctor_root" name="Doctor" sequence="0"/>
-    <menuitem id="doctor_patient" name="Doctor List" parent="doctor_root" action="action_doctor"/>
+    <menuitem id="doctor_patient" name="Doctor List" sequence="2" parent="patients_root" action="action_doctor"/>
 </odoo>

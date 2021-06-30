@@ -13,6 +13,9 @@ class Patient(models.Model):
     doctor_id = fields.Many2many('doctor.doctor', string='Doctor', required=True)
     doctor_count = fields.Integer(string='Doctors', compute='get_doctor_count')
     install_count = fields.Integer(string='Installments', compute='get_Install_count')
+    patient_debit_amount = fields.Integer(string='Debit')
+    patient_credit_amount = fields.Integer(string='Credit')
+    patient_balance_amount = fields.Integer(string='Balance')
 
     patient_age = fields.Integer(string="Age")
 
