@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="install_form_view" model="ir.ui.view">
+        <field name="name">Install.form</field>
+        <field name="model">installment.installment</field>
+        <field name="arch" type="xml">
+            <form string="Install Form">
+                <sheet>
+
+                    <group>
+                        <field name="patient_id"/>
+
+
+                    </group>
+                    <group string="Payment Info">
+                        <field name="installment"/>
+                        <field name="date"/>
+                        <field name="maturity_date"/>
+                        <field name="due_date"/>
+                        <field name="paied"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="install_tree_view" model="ir.ui.view">
+        <field name="name">Tree.install</field>
+        <field name="model">installment.installment</field>
+        <field name="arch" type="xml">
+            <tree string="tree view for Installment">
+                <field name="patient_id"/>
+                <field name="installment"/>
+
+                <field name="maturity_date"/>
+                <field name="due_date"/>
+                <field name="date"/>
+                <field name="paied"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_installment" model="ir.actions.act_window">
+        <field name="name">Installment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">installment.installment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Installment!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="installment_root" name="Install List" parent="doctor_root"
+              action="action_installment" sequence="40"/>
+
+
+</odoo>

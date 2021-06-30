@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+
+    <!--form view-->
+    <record model="ir.ui.view" id="hospital_patient_type_form">
+        <field name="model">doctor.doctor</field>
+        <field name="name">Doctor Form</field>
+        <field name="arch" type="xml">
+            <form string="New Doctor Form">
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_patients"
+                                type="object" class="oe_stat_button" icon="fa-calendar">
+                            <field name="patient_count" widget="statinfo"/>
+
+
+                        </button>
+                    </div>
+
+                    <field name="image" widget="image" class="oe_avatar"/>
+
+
+                    <group>
+                        <group string="Doctor Info">
+                            <field name="doctor_name"/>
+                            <field name="doctor_age"/>
+
+                            <field name="name_seq"/>
+
+
+                        </group>
+                        <group string="Notes">
+
+                            <field name="notes"/>
+
+
+                            <field name="gender"/>
+
+                        </group>
+                        <field name="patient_id"/>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="hospital_patient_type_tree">
+        <field name="model">doctor.doctor</field>
+        <field name="name">Doctor Tree View</field>
+        <field name="arch" type="xml">
+            <tree string="New Doctor Form">
+
+                <field name="name_seq"/>
+                <field name="doctor_name"/>
+                <field name="patient_id"/>
+                <field name="doctor_age"/>
+
+
+
+                <field name="gender"/>
+                <!--                <field name="age_group"/>-->
+
+
+                <field name="image"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    // action for create new patient
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Doctor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">doctor.doctor</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_male":1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Doctor!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="doctor_root" name="Doctor" sequence="0"/>
+    <menuitem id="doctor_patient" name="Doctor List" parent="doctor_root" action="action_doctor"/>
+</odoo>
