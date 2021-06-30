@@ -18,3 +18,39 @@ class Installment(models.Model):
         for rec in self:
             rec.paied = True
 
+    # 07 / 06 / 2021
+    @api.model
+    def create(self, vals_list):
+        print('update')
+        # print('patient = {}'.format(patient))
+        # print('patient_debit_amount = {}'.format(patient.patient_debit_amount))
+        # patient.patient_debit_amount += 20
+        # patient['patient_debit_amount'] = 20
+        # patient.update(['patient_debit_amount', '=', 20])
+        result = super(Installment, self).create(vals_list)
+        print("vals_list {}".format(vals_list))
+        print("vals_list {}".format(type(vals_list)))
+        print("vals_list {}".format(type(vals_list["patient_id"])))
+        # print("vals_list {}" + vals_list["patient_id"])
+        print(vals_list["patient_id"])
+        # for r in result:
+        #     print(r)
+        #     print(type(r))
+        # # print("vals_list {}".format(result["patient_id"]+2))
+        # print("vals_list {}".format(type(result["patient_id"])))
+
+        patient = self.env['patient.patient'].browse(vals_list["patient_id"])
+        print(patient["patient_name"])
+        print(patient.patient_debit_amount)
+        patient.patient_debit_amount += vals_list["installment"]
+        return result
+
+    def write(self, values):
+        print('write {}'.format(self.date))
+        res = super(Installment, self).write(values)
+        print('write {}'.format(self.date))
+        print('write {}'.format(res))
+        return res
+
+
+
