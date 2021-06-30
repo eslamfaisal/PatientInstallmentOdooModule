@@ -15,7 +15,7 @@ class Patient(models.Model):
     install_count = fields.Integer(string='Installments', compute='get_Install_count')
     patient_debit_amount = fields.Integer(string='Debit')
     patient_credit_amount = fields.Integer(string='Credit')
-    patient_balance_amount = fields.Integer(string='Balance', compute="get_balance")
+    patient_balance_amount = fields.Integer(string='Balance')
 
     patient_age = fields.Integer(string="Age")
 
@@ -30,6 +30,7 @@ class Patient(models.Model):
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['sequence'] = self.env['ir.sequence'].next_by_code('patient.patient.sequence') or 'New'
+            vals['patient_balance_amount'] = vals['patient_debit_amount']
             result = super(Patient, self).create(vals)
             return result
 
@@ -62,8 +63,8 @@ class Patient(models.Model):
     def get_Install_count(self):
         count = self.env['installment.installment'].search_count([('patient_id', '=', self.id)])
         self.install_count = count
-
-    @api.depends('patient_debit_amount')
-    def get_balance(self):
-        for rec in self:
-            rec.patient_balance_amount = rec.patient_debit_amount
+    #
+    # @api.depends('patient_debit_amount')
+    # def get_balance(self):
+    #     for rec in self:
+    #         rec.patient_balance_amount = rec.patient_debit_amount
